@@ -1,0 +1,7 @@
+{
+    "require": {
+        "steampixel/simple-php-router": "^0.4.1",
+        "firebase/php-jwt": "^5.2",
+        "laminas/laminas-http": "^2.13"
+    }
+}
