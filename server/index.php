@@ -7,12 +7,18 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Steampixel\Route;
 use \Firebase\JWT\JWT;
 
-$secretKey = base64_decode("teehazzan");
+$secretKey = base64_decode("Test_Key_BTC_ETH");
 //use index for indexing :))
 $device_table = array();
 $refresh_uuid_table = array();
 
 
+/**
+ * Adds/Updates Device in Fake DB
+ *
+ *
+ * @returns NULL
+ */
 function addToDB($device_id, $reset_uuid)
 {
     if (!file_exists("fauxdb.txt")) {
@@ -44,6 +50,12 @@ function addToDB($device_id, $reset_uuid)
         }
     }
 }
+/**
+ * Get device UUID from id
+ *
+ *
+ * @returns UUID
+ */
 function getDeviceUUID($device_id)
 {
     if (file_exists("fauxdb.txt")) {
@@ -53,16 +65,13 @@ function getDeviceUUID($device_id)
         return $fauxDB['refresh_uuid_table'][$index];
     }
 }
-function deviceExist($device_id)
-{
-    if (file_exists("fauxdb.txt")) {
-        $raw_text = file_get_contents("fauxdb.txt");
-        $fauxDB = json_decode($raw_text, true);
-        $index = array_search($device_id, $fauxDB['device_table']);
-        return $index;
-    }
-}
 
+/**
+ * Get new Token entity(pair)
+ *
+ *
+ * @returns {Object} access_token and refresh_key pair
+ */
 Route::add('/generate_key', function () {
     if (isset($_POST['device_id'])) {
         //generate token
@@ -99,16 +108,19 @@ Route::add('/generate_key', function () {
     }
 }, 'post');
 
+
+/**
+ * Refreshes Token entity(pair)
+ *
+ *
+ * @returns {Object} new access_token and refresh_key pair
+ */
 Route::add('/refresh_key', function () {
     list($refresh_payload_token) = sscanf($_SERVER['HTTP_AUTHORIZATION'], 'Bearer %s');
     if (isset($refresh_payload_token)) {
         $decoded = JWT::decode($refresh_payload_token, $GLOBALS['secretKey'], array('HS512'));
         //check db for uuid
         //generate another, save , hash and send
-        // print_r('decoded => \n');
-        // print_r($decoded);
-        // print_r('\n\n\n\n\n');
-        // print_r('\nfile => ' . file_get_contents("fauxdb.txt"));
         if ($decoded->reset_uuid == getDeviceUUID($decoded->device_id)) {
 
             $reset_uuid = uniqid();
@@ -142,6 +154,13 @@ Route::add('/refresh_key', function () {
     }
 }, 'post');
 
+/**
+ * Saves Data from POST Request
+ *
+ * Regquires AUth.
+ *
+ * @returns {Object} status and echos data
+ */
 Route::add('/data', function () {
     list($token) = sscanf($_SERVER['HTTP_AUTHORIZATION'], 'Bearer %s');
     if (isset($token)) {
