@@ -2,27 +2,47 @@
 
 Patricia-Code-Test is my attempt at solving Patricia Coding Test. This is a basic test of making and handling POST requests on edge and embedded devices.
 
+![Image of Test](./phpapp.png)
+Instance of the Code Running.
+
 ## Basic Explanation
 
 This codebase implements several concept involved in a fast, efficient and safe POST request in a basic embedded systems setting. It includes a system of recurring authentications with refresh token feature to reduce to surface of any attack that might otherwise invoked on the system. The basic features include
 
 - Basic Authentication of Device Using Unique identifier
 - Use of Refresh Token for re-Authorization
+- Multi-Threaded Cronjob-Like Client Task Execution.
 
-## Getting Started
+## Getting Started Quickly
+
+_I am assuming that you don't want to have to do setup anything, simply follow the instruction. This client communicates with a hosted instance of the server on HEROKU._
+
+To run this code, you need `pip`(Python3) installed on your PC for installing [requests](https://requests.readthedocs.io/en/master/user/install/).
+
+Run the following code to get started.
+
+```bash
+git clone https://github.com/teezzan/Patricia-Code-Test.git
+cd Patricia-Code-Test
+python3 -m pip install requests
+python3 ./pythonClient/client-heroku.py
+
+```
+
+You might have to install [requests](https://requests.readthedocs.io/en/master/user/install/) with root privileges.
+
+## Getting Started At Normal Speed...
 
 To run this code, you require only `composer` and `pip`(Python3) installed on your PC.
 
 Clone this repository and install the required dependencies using [composer](https://getcomposer.org/doc/00-intro.md) and [pip](https://pip.pypa.io/en/stable/) respectively.
-
-**If You don't want to have to do this(INSTALL ANYTHING), simply pull the repository and use the `Patricia-Code-Test/pythonClient/client-heroku.py` file. This communicates with a hosted instance of the server on HEROKU.**
 
 ### Pull Git Repository.
 
 ```bash
 mkdir AwesomeCandidateSubmission
 cd AwesomeCandidateSubmission
-git clone `https://github.com/teezzan/Patricia-Code-Test.git
+git clone https://github.com/teezzan/Patricia-Code-Test.git
 cd Patricia-Code-Test
 
 ```
@@ -32,10 +52,7 @@ cd Patricia-Code-Test
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install requests.
 
 ```bash
-#requires Python3
-pip install requests
-#or Depending on your PC.
-pip3 install requests
+python3 -m pip install requests
 ```
 
 You will also need to install the needed PHP dependencies by typing the following(assuming that you are in `Patricia-Code-Test` directory)

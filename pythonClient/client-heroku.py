@@ -4,8 +4,8 @@ import json
 
 globToken = ''
 globRefreshKey = ''
-device_id='Test_HARDWARE'
-url='https://pat-code.herokuapp.com'
+device_id = 'Test_HARDWARE'
+url = 'https://pat-code.herokuapp.com'
 
 
 def getToken(device_id):
@@ -39,7 +39,7 @@ def sendData(payload, token):
 
 def sendDataTimer(interval):
     threading.Timer(interval, sendDataTimer, args=(interval,)).start()
-    sendData({'amount': 1234, 'currency':'BTC'}, globToken)
+    sendData({'amount': 1234, 'currency': 'BTC'}, globToken)
 
 
 def refreshTokenTimer(interval):
@@ -47,9 +47,11 @@ def refreshTokenTimer(interval):
     print("\n RefreshToken Job Begins!!!")
     refreshToken(globRefreshKey)
 
-#fetching initial Token for Authentication
+
+# fetching initial Token for Authentication
+print('Fetching Initial Access Token')
 getToken(device_id)
-#Starting Refresh Token faux_CronJob (runs every 15 seconds)
+# Starting Refresh Token faux_CronJob (runs every 15 seconds)
 refreshTokenTimer(15)
-#Starting Refresh Token faux_CronJob (runs every 4 seconds)
+# Starting Refresh Token faux_CronJob (runs every 4 seconds)
 sendDataTimer(4)
