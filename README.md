@@ -1,5 +1,7 @@
 # Patricia-Code-Test
 
+<img src="https://heroku-badges.herokuapp.com/?app=pat-code" />
+
 Patricia-Code-Test is my attempt at solving Patricia Coding Test. This is a basic test of making and handling POST requests on edge and embedded devices.
 
 ![Image of Test](./phpapp.png)
