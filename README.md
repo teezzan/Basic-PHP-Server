@@ -15,6 +15,8 @@ To run this code, you require only `composer` and `pip`(Python3) installed on yo
 
 Clone this repository and install the required dependencies using [composer](https://getcomposer.org/doc/00-intro.md) and [pip](https://pip.pypa.io/en/stable/) respectively.
 
+**If You don't want to have to do this(INSTALL ANYTHING), simply pull the repository and use the `Patricia-Code-Test/pythonClient/client-heroku.py` file. This communicates with a hosted instance of the server on HEROKU.**
+
 ### Pull Git Repository.
 
 ```bash
@@ -62,6 +64,14 @@ the following from the `Patricia-Code-Test/pythonClient` directory.
 python client.py
 #or depending on your Machine
 python3 client.py
+```
+
+and if you want to use the heroku server instance instead, run
+
+```bash
+python client-heroku.py
+#or depending on your Machine
+python3 client-heroku.py
 ```
 
 ## License
