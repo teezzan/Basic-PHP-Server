@@ -5,13 +5,14 @@ import json
 globToken = ''
 globRefreshKey = ''
 device_id='Test_HARDWARE'
+url='http://localhost:8000'
 
 
 def getToken(device_id):
     global globToken
     global globRefreshKey
     response = requests.post(
-        'http://localhost:8000/generate_key', data={'device_id': device_id})
+        url+'/generate_key', data={'device_id': device_id})
     val = json.loads(response.text)
     globToken = val["access_token"]
     globRefreshKey = val["refresh_token"]
@@ -21,7 +22,7 @@ def refreshToken(token):
     global globToken
     global globRefreshKey
     response = requests.post(
-        'http://localhost:8000/refresh_key',
+        url+'/refresh_key',
         headers={'Authorization': 'Bearer ' + token})
     print(response.text)
     val = json.loads(response.text)
@@ -32,7 +33,7 @@ def refreshToken(token):
 
 def sendData(payload, token):
     print('\n Posting Data: ' + str(payload))
-    response = requests.post('http://localhost:8000/data', data=payload,
+    response = requests.post(url+'/data', data=payload,
                              headers={'Authorization': 'Bearer ' + token})
     print(response.text)
 
