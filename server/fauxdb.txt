@@ -1,0 +1,1 @@
+{"device_table":["Test_HARDWARE"],"refresh_uuid_table":["5f68415fa25e0"]}
